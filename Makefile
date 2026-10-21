@@ -2,7 +2,7 @@ GO ?= go
 DIST ?= dist
 BINARY := krillion$(if $(filter Windows_NT,$(OS)),.exe,)
 
-.PHONY: build macos linux windows release test vet clean
+.PHONY: build macos macos-app linux windows release test vet clean
 
 build:
 	$(GO) build -o $(BINARY) .
@@ -11,6 +11,9 @@ macos:
 	@mkdir -p $(DIST)
 	GOOS=darwin GOARCH=arm64 CGO_ENABLED=0 $(GO) build -o $(DIST)/krillion-darwin-arm64 .
 	GOOS=darwin GOARCH=amd64 CGO_ENABLED=0 $(GO) build -o $(DIST)/krillion-darwin-amd64 .
+
+macos-app:
+	xcodebuild -project macos/KrillionBar.xcodeproj -scheme KrillionBar -configuration Release -derivedDataPath $(DIST)/xcode CODE_SIGNING_ALLOWED=NO build
 
 linux:
 	@mkdir -p $(DIST)
