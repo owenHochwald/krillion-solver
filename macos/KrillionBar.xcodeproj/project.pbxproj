@@ -28,6 +28,7 @@
 /* Begin PBXFileReference section */
 		3EE6B5C0A1C232D984FC2283 /* AnswerClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerClientTests.swift; sourceTree = "<group>"; };
 		585F77EA364249D1125584E5 /* AnswerPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerPanel.swift; sourceTree = "<group>"; };
+		6450D091FCFA2D114C3E07C3 /* KrillionBar.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = KrillionBar.entitlements; sourceTree = "<group>"; };
 		8AAE67F57EC8693A0D6858FB /* AnswerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerStore.swift; sourceTree = "<group>"; };
 		8DB8352426D32BD6552DFB0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF561C111D92DF595EBFA94D /* KrillionBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KrillionBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -61,6 +62,7 @@
 				F15668FB411E4F619490B79F /* Answers.swift */,
 				8AAE67F57EC8693A0D6858FB /* AnswerStore.swift */,
 				8DB8352426D32BD6552DFB0F /* Assets.xcassets */,
+				6450D091FCFA2D114C3E07C3 /* KrillionBar.entitlements */,
 				F87661F4B2D2DE6FDE453585 /* KrillionBarApp.swift */,
 			);
 			path = KrillionBar;
@@ -231,9 +233,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = KrillionBar/KrillionBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Krillion Bar";
 				INFOPLIST_KEY_LSUIElement = YES;
@@ -308,9 +312,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = KrillionBar/KrillionBar.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Krillion Bar";
 				INFOPLIST_KEY_LSUIElement = YES;
