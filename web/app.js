@@ -23,7 +23,7 @@ function validate(data) {
 function plainText() {
   const data = state.result;
   const intro = data.demo ? "DEMO — illustrative answers, not today's puzzle" : `KRILLION · Dive #${data.dayNumber} · ${data.date}`;
-  return [intro, ...data.prompts.map((round, index) => `${index + 1}. ${clean(round.text)}\n${round.fallback ? "   No One in a Krillion answer — best available:\n" : ""}${round.winners.map((answer) => `   ${clean(answer.answer)}  (+${answer.score})`).join("\n")}`)].join("\n\n");
+  return [intro, ...data.prompts.map((round, index) => `${index + 1}. ${clean(round.text)}\n${round.fallback ? "   No One in a Krillion answer — best available:\n" : ""}${round.winners.map((answer) => `   ${clean(answer.answer)}`).join("\n")}`)].join("\n\n");
 }
 
 async function copy(text) {
@@ -77,14 +77,14 @@ function renderDetail() {
   const panel = $("answer-panel");
   panel.replaceChildren();
   const top = element("div", "detail-top", "");
-  top.append(element("p", "eyebrow", `ROUND ${String(state.selected + 1).padStart(2, "0")} / 07`), element("span", "points", `+${answer.score} PTS`));
+  top.append(element("p", "eyebrow", `ROUND ${String(state.selected + 1).padStart(2, "0")} / 07`));
   panel.append(top, element("p", "prompt", clean(round.text)), element("div", "separator", ""));
   panel.append(element("p", "answer-label", round.fallback ? "◆ BEST AVAILABLE" : "◆ ONE IN A KRILLION"));
   panel.append(element("h3", "answer-name", clean(answer.answer)));
   if (answer.quip) panel.append(element("p", "quip", clean(answer.quip)));
   if (round.fallback) panel.append(element("p", "fallback", "No One in a Krillion answer was available for this round."));
   const actions = element("div", "answer-actions", "");
-  const copyButton = element("button", "button button-primary", "Copy answer ↗");
+  const copyButton = element("button", "button", "Copy answer");
   copyButton.type = "button";
   copyButton.addEventListener("click", () => copy(clean(answer.answer)));
   actions.append(copyButton);
@@ -120,12 +120,9 @@ function updateReset() {
 
 function render() {
   const data = state.result;
-  $("dive-title").textContent = data.demo ? "Illustrative dive" : `Dive #${data.dayNumber}`;
+  $("dive-title").textContent = data.demo ? "Illustrative dive" : `DIVE ${String(data.dayNumber).padStart(3, "0")}`;
   $("dive-meta").textContent = data.demo ? "Demo only · these are not today's answers" : `${data.date} · ${data.prompts.reduce((sum, round) => sum + round.winners.length, 0)} top answers`;
   $("round-count").textContent = `${String(state.selected + 1).padStart(2, "0")} / 07`;
-  const score = data.prompts.reduce((sum, round) => sum + round.winners[0].score, 0);
-  const fallback = data.prompts.filter((round) => round.fallback).length;
-  $("score-summary").textContent = `${score} best available points · 7 / 7 rounds${fallback ? ` · ${fallback} without Krillion` : ""}`;
   $("copy-all").disabled = false;
   renderList();
   renderDetail();
