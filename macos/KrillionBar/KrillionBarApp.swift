@@ -11,8 +11,9 @@ struct KrillionBarApp: App {
                 .frame(maxHeight: 610)
                 .onAppear { store.loadIfNeeded() }
         } label: {
-            Image("Shrimp")
+            Image("MenuBarShrimp")
                 .renderingMode(.template)
+                .accessibilityLabel("Krillion Solver")
         }
         .menuBarExtraStyle(.window)
     }
