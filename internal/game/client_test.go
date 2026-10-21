@@ -70,6 +70,57 @@ func TestSolveAnonymousAndMultipleWinners(t *testing.T) {
 	}
 }
 
+func TestSolveUsesBestAvailableWhenKrillionIsAbsent(t *testing.T) {
+	for _, test := range []struct {
+		name    string
+		answers []Answer
+		score   int
+		count   int
+	}{
+		{"deep cuts", []Answer{
+			{Answer: "Common", Tier: "schooler", Score: 30},
+			{Answer: "Deep cut A", Tier: "deep_cut", Score: 85},
+			{Answer: "Mid", Tier: "mid", Score: 60},
+			{Answer: "Deep cut B", Tier: "deep_cut", Score: 85},
+		}, 85, 2},
+		{"lower tier", []Answer{
+			{Answer: "Common", Tier: "schooler", Score: 30},
+		}, 30, 1},
+	} {
+		t.Run(test.name, func(t *testing.T) {
+			d, v := fixture()
+			v.Prompts[0].Answers = test.answers
+			c := testClient(func(w http.ResponseWriter, r *http.Request) {
+				if r.URL.Path == "/api/today" {
+					json.NewEncoder(w).Encode(d)
+				} else {
+					json.NewEncoder(w).Encode(v)
+				}
+			})
+			got, err := c.Solve(context.Background())
+			if err != nil {
+				t.Fatal(err)
+			}
+			p := got.Prompts[0]
+			if !p.Fallback || got.FallbackCount() != 1 || got.Score() != 600+test.score || len(p.Winners) != test.count {
+				t.Fatalf("wrong fallback: %+v", got)
+			}
+			for _, answer := range p.Winners {
+				if answer.Score != test.score {
+					t.Fatalf("selected a lower-scoring answer: %+v", p.Winners)
+				}
+			}
+			if !strings.Contains(got.Plain(), "No One in a Krillion answer") || !strings.Contains(got.Plain(), "best available") {
+				t.Fatal("plain output omitted the fallback notice")
+			}
+			encoded, err := json.Marshal(got)
+			if err != nil || !strings.Contains(string(encoded), "\"fallback\":true") {
+				t.Fatalf("JSON omitted the fallback flag: %s", encoded)
+			}
+		})
+	}
+}
+
 func TestSolveRejectsIncompleteOrChangedData(t *testing.T) {
 	for _, test := range []struct {
 		name   string
