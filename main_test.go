@@ -28,7 +28,7 @@ func TestDemoOutput(t *testing.T) {
 }
 
 func TestInvalidFlags(t *testing.T) {
-	for _, args := range [][]string{{"--plain", "--json"}, {"unexpected"}, {"--timeout=0"}} {
+	for _, args := range [][]string{{"--plain", "--json"}, {"--web", "--json"}, {"unexpected"}, {"--timeout=0"}} {
 		var out, errs bytes.Buffer
 		if code := run(context.Background(), args, &out, &errs); code != 2 || out.Len() != 0 {
 			t.Fatalf("bad arguments should fail without output: %v", args)
