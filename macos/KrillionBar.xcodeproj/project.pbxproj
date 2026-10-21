@@ -1,0 +1,424 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1AC53D3C086CA4761A2FDE85 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8DB8352426D32BD6552DFB0F /* Assets.xcassets */; };
+		3373E57DAF16165E7C56DB46 /* AnswerPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 585F77EA364249D1125584E5 /* AnswerPanel.swift */; };
+		5B34BBC88ADF0218B9CCA65D /* Answers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F15668FB411E4F619490B79F /* Answers.swift */; };
+		8C0695BA6C14B748A8E6CEC4 /* AnswerClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE6B5C0A1C232D984FC2283 /* AnswerClientTests.swift */; };
+		AB5919DF9CA0A61DDE7552D7 /* KrillionBarApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F87661F4B2D2DE6FDE453585 /* KrillionBarApp.swift */; };
+		D63B403A96F4143DABDB0EB2 /* AnswerStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AAE67F57EC8693A0D6858FB /* AnswerStore.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		989798BE4CB5D02C57D5BD27 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B24C01A44028FAEFEED40241 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D5455DDDF3B1938DF1E2F76B;
+			remoteInfo = KrillionBar;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		3EE6B5C0A1C232D984FC2283 /* AnswerClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerClientTests.swift; sourceTree = "<group>"; };
+		585F77EA364249D1125584E5 /* AnswerPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerPanel.swift; sourceTree = "<group>"; };
+		8AAE67F57EC8693A0D6858FB /* AnswerStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerStore.swift; sourceTree = "<group>"; };
+		8DB8352426D32BD6552DFB0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		EF561C111D92DF595EBFA94D /* KrillionBar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KrillionBar.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F15668FB411E4F619490B79F /* Answers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answers.swift; sourceTree = "<group>"; };
+		F87661F4B2D2DE6FDE453585 /* KrillionBarApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KrillionBarApp.swift; sourceTree = "<group>"; };
+		FEEB2C09F20A9306880FAA8C /* KrillionBarTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KrillionBarTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		603467185778580F841106EF /* KrillionBarTests */ = {
+			isa = PBXGroup;
+			children = (
+				3EE6B5C0A1C232D984FC2283 /* AnswerClientTests.swift */,
+			);
+			path = KrillionBarTests;
+			sourceTree = "<group>";
+		};
+		98BE1B26AC9E083CDEEE959D = {
+			isa = PBXGroup;
+			children = (
+				B535A75126D6E37310DF42F9 /* KrillionBar */,
+				603467185778580F841106EF /* KrillionBarTests */,
+				C5246E5927AF441E3078B32E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B535A75126D6E37310DF42F9 /* KrillionBar */ = {
+			isa = PBXGroup;
+			children = (
+				585F77EA364249D1125584E5 /* AnswerPanel.swift */,
+				F15668FB411E4F619490B79F /* Answers.swift */,
+				8AAE67F57EC8693A0D6858FB /* AnswerStore.swift */,
+				8DB8352426D32BD6552DFB0F /* Assets.xcassets */,
+				F87661F4B2D2DE6FDE453585 /* KrillionBarApp.swift */,
+			);
+			path = KrillionBar;
+			sourceTree = "<group>";
+		};
+		C5246E5927AF441E3078B32E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				EF561C111D92DF595EBFA94D /* KrillionBar.app */,
+				FEEB2C09F20A9306880FAA8C /* KrillionBarTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C00ED73790B818D6AC691922 /* KrillionBarTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FE0932CF1BFD96ADF1D80B3B /* Build configuration list for PBXNativeTarget "KrillionBarTests" */;
+			buildPhases = (
+				50920882A03F5FD9A6E96F9F /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				664FFD990FF93D202DC0788A /* PBXTargetDependency */,
+			);
+			name = KrillionBarTests;
+			packageProductDependencies = (
+			);
+			productName = KrillionBarTests;
+			productReference = FEEB2C09F20A9306880FAA8C /* KrillionBarTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D5455DDDF3B1938DF1E2F76B /* KrillionBar */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0501D7C6FE08173F685A37F4 /* Build configuration list for PBXNativeTarget "KrillionBar" */;
+			buildPhases = (
+				14293F1D85415F8B97685CAD /* Sources */,
+				4A0D5BE9D0FCEDF8AD946AE2 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KrillionBar;
+			packageProductDependencies = (
+			);
+			productName = KrillionBar;
+			productReference = EF561C111D92DF595EBFA94D /* KrillionBar.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B24C01A44028FAEFEED40241 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					D5455DDDF3B1938DF1E2F76B = {
+						DevelopmentTeam = "";
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 27FBA4760CC31547A149B028 /* Build configuration list for PBXProject "KrillionBar" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 98BE1B26AC9E083CDEEE959D;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = C5246E5927AF441E3078B32E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D5455DDDF3B1938DF1E2F76B /* KrillionBar */,
+				C00ED73790B818D6AC691922 /* KrillionBarTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		4A0D5BE9D0FCEDF8AD946AE2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1AC53D3C086CA4761A2FDE85 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		14293F1D85415F8B97685CAD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3373E57DAF16165E7C56DB46 /* AnswerPanel.swift in Sources */,
+				D63B403A96F4143DABDB0EB2 /* AnswerStore.swift in Sources */,
+				5B34BBC88ADF0218B9CCA65D /* Answers.swift in Sources */,
+				AB5919DF9CA0A61DDE7552D7 /* KrillionBarApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		50920882A03F5FD9A6E96F9F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C0695BA6C14B748A8E6CEC4 /* AnswerClientTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		664FFD990FF93D202DC0788A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D5455DDDF3B1938DF1E2F76B /* KrillionBar */;
+			targetProxy = 989798BE4CB5D02C57D5BD27 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		08911F4381C536CFEB9B780A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.krillion.solver.KrillionBarTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KrillionBar.app/Contents/MacOS/KrillionBar";
+			};
+			name = Debug;
+		};
+		10C23A0BBB3D093FAEA3FF54 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.krillion.solver.KrillionBarTests;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KrillionBar.app/Contents/MacOS/KrillionBar";
+			};
+			name = Release;
+		};
+		2E389A0E60AF7FD642273A86 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Krillion Bar";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSAppTransportSecurity_NSAllowsArbitraryLoads = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.krillion.solver.bar;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		CCD768D992D6D332A861FEA6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		DDEB2E3B06ED5C555AEFD570 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = "";
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = "Krillion Bar";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSAppTransportSecurity_NSAllowsArbitraryLoads = NO;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = io.krillion.solver.bar;
+				SDKROOT = macosx;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F49094465053E3650455681B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0501D7C6FE08173F685A37F4 /* Build configuration list for PBXNativeTarget "KrillionBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDEB2E3B06ED5C555AEFD570 /* Debug */,
+				2E389A0E60AF7FD642273A86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		27FBA4760CC31547A149B028 /* Build configuration list for PBXProject "KrillionBar" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F49094465053E3650455681B /* Debug */,
+				CCD768D992D6D332A861FEA6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		FE0932CF1BFD96ADF1D80B3B /* Build configuration list for PBXNativeTarget "KrillionBarTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				08911F4381C536CFEB9B780A /* Debug */,
+				10C23A0BBB3D093FAEA3FF54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B24C01A44028FAEFEED40241 /* Project object */;
+}
