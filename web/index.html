@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#061623">
+  <meta name="description" content="Today's Krillion prompts and best available answers, in one easy dive.">
+  <title>Krillion Solver</title>
+  <link rel="stylesheet" href="./styles.css">
+  <script src="./app.js" defer></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="masthead">
+      <div class="brand"><span class="brand-mark" aria-hidden="true">✳</span><span>KRILLION <strong>SOLVER</strong></span></div>
+      <a class="source-link" href="https://github.com/owenHochwald/krillion-solver">View source <span aria-hidden="true">↗</span></a>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="page-title">
+        <div>
+          <p class="eyebrow">THE DAILY DIVE <span aria-hidden="true">/</span> ALL SEVEN ROUNDS</p>
+          <h1 id="page-title">Find the <em>rare ones.</em></h1>
+          <p class="intro-copy">Every top answer to today's Krillion puzzle, gathered in one place. Pick a round, find your answer, and get back to the game.</p>
+        </div>
+        <div class="dive-badge" aria-hidden="true"><span>↓</span><small>GO DEEPER</small></div>
+      </section>
+
+      <section class="dashboard" aria-label="Daily answers">
+        <div class="dashboard-head">
+          <div><p class="eyebrow">CURRENT CONDITIONS</p><h2 id="dive-title">Loading today's dive…</h2><p id="dive-meta" class="muted">Following the current.</p></div>
+          <div class="head-actions"><button id="refresh" class="icon-button" type="button" title="Refresh answers" aria-label="Refresh answers">↻</button><button id="copy-all" class="button button-secondary" type="button" disabled>Copy all answers</button></div>
+        </div>
+        <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+        <div class="dashboard-body">
+          <nav class="round-nav" aria-label="Rounds"><div class="panel-label">THE CATCH <span id="round-count">00 / 07</span></div><div id="round-list" class="round-list"></div></nav>
+          <section id="answer-panel" class="answer-panel" aria-live="polite"><div class="empty-state"><span class="spinner" aria-hidden="true"></span><p>Descending into today's dive…</p></div></section>
+        </div>
+        <div class="dashboard-foot"><span id="score-summary">Seven rounds. Every perfect answer.</span><span id="reset-time"></span></div>
+      </section>
+      <p class="disclaimer">Unofficial companion to <a href="https://krillion.io/">Krillion</a>. Answers reveal the daily puzzle.</p>
+    </main>
+    <footer class="site-footer"><span>KRILLION SOLVER <span class="footer-dot">✳</span> MADE FOR CURIOUS MINDS</span><span>TAKE THE PLUNGE <span aria-hidden="true">↗</span></span></footer>
+  </div>
+</body>
+</html>
