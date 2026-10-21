@@ -184,7 +184,10 @@ func (m Model) header(w int) string {
 	}
 	meta := "7 prompts. Every perfect answer."
 	if !m.loading && m.err == nil && len(m.result.Prompts) > 0 {
-		meta = fmt.Sprintf("DIVE %03d  /  %s  /  %d winning answers", m.result.DayNumber, m.result.Date, m.result.WinnerCount())
+		meta = fmt.Sprintf("DIVE %03d  /  %s  /  %d top answers", m.result.DayNumber, m.result.Date, m.result.WinnerCount())
+		if n := m.result.FallbackCount(); n > 0 {
+			meta += fmt.Sprintf("  /  %d without Krillion", n)
+		}
 		if m.demo {
 			meta = "ILLUSTRATIVE ANSWERS / not today's puzzle"
 		}
@@ -226,19 +229,27 @@ func (m Model) roundTabs(w int) string {
 		}
 		tabs = append(tabs, style.Render(fmt.Sprintf(" %d ", i+1)))
 	}
-	return between(strings.Join(tabs, " "), ink(gold).Render("+100"), w)
+	score := m.result.Prompts[m.selected].Winners[m.pick].Score
+	return between(strings.Join(tabs, " "), ink(gold).Render(fmt.Sprintf("+%d", score)), w)
 }
 
 func (m Model) detail(w, h int) string {
 	p := m.result.Prompts[m.selected]
 	a := p.Winners[m.pick]
 	var parts []string
-	parts = append(parts, between(ink(cyan).Render(fmt.Sprintf("ROUND %02d / 07", m.selected+1)), ink(gold).Bold(true).Render("+100"), w), "")
+	parts = append(parts, between(ink(cyan).Render(fmt.Sprintf("ROUND %02d / 07", m.selected+1)), ink(gold).Bold(true).Render(fmt.Sprintf("+%d", a.Score)), w), "")
 	if h < 12 {
 		parts = []string{parts[0], ink(gold).Bold(true).Width(w).Render("◆ " + game.SafeText(a.Answer)), "", ink(pearl).Width(w).Render(game.SafeText(p.Text)), ""}
+		if p.Fallback {
+			parts = []string{parts[0], ink(coral).Width(w).Render("No One in a Krillion answer"), ink(gold).Bold(true).Width(w).Render("◆ " + game.SafeText(a.Answer)), ink(pearl).Width(w).Render(game.SafeText(p.Text)), ""}
+		}
 	} else {
 		parts = append(parts, ink(pearl).Width(w).Render(game.SafeText(p.Text)), "", ink(line).Render(strings.Repeat("─", w)), "")
-		parts = append(parts, ink(gold).Render("◆ ONE IN A KRILLION"), ink(gold).Bold(true).Width(w).Render(game.SafeText(a.Answer)), "")
+		label := "◆ ONE IN A KRILLION"
+		if p.Fallback {
+			label = "◆ BEST AVAILABLE · NO ONE IN A KRILLION"
+		}
+		parts = append(parts, ink(gold).Render(label), ink(gold).Bold(true).Width(w).Render(game.SafeText(a.Answer)), "")
 	}
 	if a.Quip != "" {
 		parts = append(parts, ink(muted).Width(w).Render(game.SafeText(a.Quip)), "")
@@ -271,6 +282,13 @@ func (m Model) footer(w int) string {
 	stat := "Loading today's answers"
 	if !m.loading && m.err == nil && len(m.result.Prompts) > 0 {
 		stat = fmt.Sprintf("%d / 700 possible points · 7 / 7 rounds", m.result.Score())
+		if n := m.result.FallbackCount(); n > 0 {
+			rounds := "rounds"
+			if n == 1 {
+				rounds = "round"
+			}
+			stat = fmt.Sprintf("%d points · %d %s without Krillion", m.result.Score(), n, rounds)
+		}
 	}
 	reset := ""
 	if m.result.ResetsAt != nil && !m.demo {
