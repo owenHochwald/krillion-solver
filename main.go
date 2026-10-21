@@ -30,9 +30,11 @@ func run(ctx context.Context, args []string, out, errOut io.Writer) int {
 	demo := flags.Bool("demo", false, "preview the ocean interface with illustrative data (offline)")
 	plain := flags.Bool("plain", false, "print all winning answers without the interactive interface")
 	jsonOutput := flags.Bool("json", false, "print winning answers as JSON")
+	web := flags.Bool("web", false, "serve the browser interface locally")
+	addr := flags.String("addr", "127.0.0.1:8080", "HTTP listen address for --web")
 	timeout := flags.Duration("timeout", 25*time.Second, "overall time limit for fetching a daily puzzle")
 	flags.Usage = func() {
-		fmt.Fprint(errOut, "Krillion Solver\n\nUsage: krillion [--demo] [--plain | --json]\n\n")
+		fmt.Fprint(errOut, "Krillion Solver\n\nUsage: krillion [--demo] [--plain | --json | --web]\n\n")
 		flags.PrintDefaults()
 	}
 	if err := flags.Parse(args); err != nil {
@@ -41,9 +43,17 @@ func run(ctx context.Context, args []string, out, errOut io.Writer) int {
 		}
 		return 2
 	}
-	if flags.NArg() > 0 || (*plain && *jsonOutput) || *timeout <= 0 {
-		fmt.Fprintln(errOut, "use no positional arguments, choose either --plain or --json, and set a positive timeout")
+	if flags.NArg() > 0 || (*plain && *jsonOutput) || (*web && (*plain || *jsonOutput)) || *timeout <= 0 {
+		fmt.Fprintln(errOut, "use no positional arguments, choose one output mode, and set a positive timeout")
 		return 2
+	}
+	if *web {
+		fmt.Fprintf(out, "Krillion Solver at http://%s\n", *addr)
+		if err := serveWeb(ctx, *addr, *demo); err != nil {
+			fmt.Fprintln(errOut, "krillion:", err)
+			return 1
+		}
+		return 0
 	}
 	load := func() (game.Result, error) {
 		if *demo {
