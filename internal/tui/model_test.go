@@ -99,3 +99,17 @@ func TestHeaderFits(t *testing.T) {
 		t.Fatal("compact layout hides the title")
 	}
 }
+
+func TestFallbackScoreAndNotice(t *testing.T) {
+	for _, size := range [][2]int{{112, 36}, {44, 20}} {
+		m := ready()
+		m.demo, m.result.Demo = false, false
+		m.width, m.height = size[0], size[1]
+		m.result.Prompts[0].Winners = []game.Answer{{Answer: "Deep cut", Tier: "deep_cut", Score: 85}}
+		m.result.Prompts[0].Fallback = true
+		view := ansi.Strip(m.View().Content)
+		if !strings.Contains(view, "+85") || !strings.Contains(strings.ToLower(view), "no one in a krillion") {
+			t.Errorf("fallback score or note missing at %dx%d:\n%s", m.width, m.height, view)
+		}
+	}
+}
