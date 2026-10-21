@@ -1,6 +1,6 @@
 # Krillion Solver
 
-An unofficial solver for [Krillion](https://krillion.io/). See every **One in a Krillion** answer for today's seven prompts, read its description, switch between equally scoring picks, and copy an answer or the full list.
+An unofficial solver for [Krillion](https://krillion.io/). See today's seven prompts and their top answers, read each description, switch between equal picks, and copy an answer or the full list. If a round has no One in a Krillion answer, the app labels its highest-scoring available pick.
 
 ![Krillion Solver showing today's answers and alternate picks](assets/krillion-solver.png)
 
