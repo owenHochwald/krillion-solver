@@ -2,10 +2,13 @@ GO ?= go
 DIST ?= dist
 BINARY := krillion$(if $(filter Windows_NT,$(OS)),.exe,)
 
-.PHONY: build macos macos-app linux windows release test vet clean
+.PHONY: build web macos macos-app linux windows release test vet clean
 
 build:
 	$(GO) build -o $(BINARY) .
+
+web:
+	$(GO) run . --web
 
 macos:
 	@mkdir -p $(DIST)
