@@ -19,6 +19,12 @@ var (
 	line  = lipgloss.Color("#244354")
 )
 
+const asciiLogo = `  _  __     _ _ _ _                ____        _
+ | |/ /_ __(_) | (_) ___  _ __    / ___|  ___ | |_   _____ _ __
+ | ' /| '__| | | | |/ _ \| '_ \   \___ \ / _ \| \ \ / / _ \ '__|
+ | . \| |  | | | | | (_) | | | |   ___) | (_) | |\ V /  __/ |
+ |_|\_\_|  |_|_|_|_|\___/|_| |_|  |____/ \___/|_| \_/ \___|_|`
+
 func ink(c color.Color) lipgloss.Style {
 	return lipgloss.NewStyle().Foreground(c)
 }
