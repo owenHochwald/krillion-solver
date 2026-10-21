@@ -1,6 +1,7 @@
 package tui
 
 import (
+	"errors"
 	"strings"
 	"testing"
 
@@ -47,5 +48,54 @@ func TestRoundAndAlternateNavigation(t *testing.T) {
 	m = next.(Model)
 	if m.selected != 4 || m.pick != 0 {
 		t.Fatal("changing rounds must reset alternate selection")
+	}
+}
+
+func TestCopyReportsResult(t *testing.T) {
+	m := ready()
+	var copiedText string
+	m.copy = func(text string) error { copiedText = text; return nil }
+	next, cmd := m.Update(tea.KeyPressMsg{Code: 'c', Text: "c"})
+	m = next.(Model)
+	if cmd == nil || copiedText != "" {
+		t.Fatal("copy should run without a confirmation step")
+	}
+	next, _ = m.Update(cmd())
+	m = next.(Model)
+	if copiedText != "Dekalog" || m.notice != "Copied to clipboard" {
+		t.Fatalf("copy result was not confirmed: %q, %q", copiedText, m.notice)
+	}
+	next, cmd = m.Update(tea.KeyPressMsg{Code: 'a', Text: "a"})
+	m = next.(Model)
+	if cmd == nil {
+		t.Fatal("copy all should run")
+	}
+	next, _ = m.Update(cmd())
+	m = next.(Model)
+	if !strings.Contains(copiedText, "Hydrofoil") {
+		t.Fatal("copy all omitted alternate answers")
+	}
+}
+
+func TestCopyFailureIsVisible(t *testing.T) {
+	m := ready()
+	m.copy = func(string) error { return errors.New("clipboard unavailable") }
+	next, cmd := m.Update(tea.KeyPressMsg{Code: 'c', Text: "c"})
+	m = next.(Model)
+	next, _ = m.Update(cmd())
+	m = next.(Model)
+	if m.notice != "Copy failed: clipboard unavailable" {
+		t.Fatalf("copy failure was hidden: %q", m.notice)
+	}
+}
+
+func TestHeaderFits(t *testing.T) {
+	if lipgloss.Width(asciiLogo) > 88 {
+		t.Fatal("ASCII logo exceeds wide layout")
+	}
+	m := ready()
+	m.width, m.height = 44, 20
+	if !strings.Contains(ansi.Strip(m.View().Content), "KRILLION SOLVER") {
+		t.Fatal("compact layout hides the title")
 	}
 }
