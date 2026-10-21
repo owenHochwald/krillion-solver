@@ -1,5 +1,6 @@
-/krillion
-/krillion.exe
-/dist/
-/.cache/
-*.test
+dist/
+krillion
+krillion.exe
+*.xcuserstate
+xcuserdata/
+.DS_Store
