@@ -1,55 +1,9 @@
 # Krillion Solver
 
-An unofficial solver for [Krillion](https://krillion.io/). See today's seven prompts and their top answers, read each description, switch between equal picks, and copy an answer or the full list. If a round has no One in a Krillion answer, the app labels its highest-scoring available pick.
+An unofficial companion for [Krillion](https://krillion.io/). Find today's top answers in the format that fits how you play:
 
-![Krillion Solver showing today's answers and alternate picks](assets/krillion-solver.png)
+- **Terminal:** [Run the TUI](internal/README.md) for a keyboard driven view.
+- **macOS:** [Run the menu bar app](macos/README.md) for answers a click away while you play.
+- **Browser:** [Open Krillion Solver](https://owenhochwald.github.io/krillion-solver/) for instant access, with no setup.
 
-## Run
-
-[Download a macOS, Linux, or Windows build](https://github.com/owenHochwald/krillion-solver/releases/latest), or build from source with Go 1.25 or later:
-
-```sh
-make
-./krillion
-```
-
-On Windows without Make:
-
-```powershell
-go build -o krillion.exe .
-.\krillion.exe
-```
-
-Use `↑`/`↓` or `j`/`k` to move between prompts, `←`/`→` to switch alternate answers, `c` to copy the selected answer, and `a` to copy every answer.
-
-`make release` builds macOS, Linux, and Windows binaries in `dist/`.
-
-## Browser app
-
-Run the Go HTTP app locally with `make web`, then open <http://127.0.0.1:8080>. Use `go run . --web --demo` to preview illustrative data without reaching Krillion. The app serves its HTML, CSS, and JavaScript from the binary and uses the same Go solver as the TUI for `/data.json`. Change the listen address with `--addr`.
-
-For public hosting, the included GitHub Pages workflow builds a static copy of the same interface and generates `data.json` with `go run . --json`. GitHub Pages cannot run a Go HTTP server, so the workflow updates the answers hourly and on pushes to `main`. The page shows the puzzle date so visitors can tell which dive is published. A failed fetch leaves the previous successful deployment online.
-
-To publish it:
-
-1. Push the commits to `main` on GitHub.
-2. In the repository, open **Settings → Pages** and choose **GitHub Actions** under **Build and deployment**.
-3. Run **Actions → Publish web app → Run workflow** once, or wait for the push workflow. The site will appear at <https://owenHochwald.github.io/krillion-solver/>.
-
-The workflow needs public access to Krillion's `/api/today` and `/api/reveal` endpoints. GitHub's scheduled runs can start late, so the new puzzle may appear after its reset time. Use the workflow's manual run button to refresh it sooner.
-
-## macOS menu bar app
-
-The TUI also has a companion menu bar app for macOS 14 or later. Click its shrimp icon to see all seven answers in a compact panel, expand a round for the prompt and alternate winners, or copy an answer. It works alongside any browser.
-
-With Xcode installed, build and open the app with:
-
-```sh
-make menu-bar
-```
-
-This puts the app at `dist/KrillionBar.app` and opens it. Look for the shrimp in the top menu bar; the app has no Dock window. For a build without opening it, use `make menu-bar-build`. You can open an existing build later with `open dist/KrillionBar.app`. The older `make macos-app` command still builds the app.
-
-The app uses the same daily Krillion endpoints and validation rules as the TUI. Its source is under `macos/KrillionBar/`, and the Xcode project is `macos/KrillionBar.xcodeproj`.
-
-`make menu-bar` builds from local source and produces an unsigned app for your own Mac. **Do not distribute that unsigned build or ask users to disable Gatekeeper.** The Xcode target is configured for the hardened runtime and App Sandbox with outgoing network access. For a downloadable release that macOS can verify, sign the app with a Developer ID certificate and notarize the distributed package with Apple. Signing establishes the publisher; notarization adds Apple's automated checks. Until that release process exists, the reproducible local build is the supported way to try the menu bar app.
+Each version shows all seven prompts, equal scoring answers, and the best available pick when no One in a Krillion answer exists.
