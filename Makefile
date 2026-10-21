@@ -25,7 +25,8 @@ menu-bar-build:
 	@printf 'Built %s\n' "$(MENU_BAR_APP)"
 
 menu-bar: menu-bar-build
-	open "$(MENU_BAR_APP)"
+	@killall KrillionBar 2>/dev/null || true
+	open -n "$(MENU_BAR_APP)"
 
 macos-app: menu-bar-build
 
