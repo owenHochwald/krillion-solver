@@ -13,7 +13,7 @@ import (
 
 func TestWebHandler(t *testing.T) {
 	handler := webHandler(func(context.Context) (game.Result, error) { return game.Demo(), nil })
-	for _, path := range []string{"/", "/styles.css", "/app.js", "/data.json"} {
+	for _, path := range []string{"/", "/styles.css", "/app.js", "/github.svg", "/data.json"} {
 		r := httptest.NewRecorder()
 		handler.ServeHTTP(r, httptest.NewRequest(http.MethodGet, path, nil))
 		if r.Code != http.StatusOK {
