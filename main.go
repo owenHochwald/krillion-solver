@@ -32,7 +32,7 @@ func run(ctx context.Context, args []string, out, errOut io.Writer) int {
 	jsonOutput := flags.Bool("json", false, "print winning answers as JSON")
 	timeout := flags.Duration("timeout", 25*time.Second, "overall time limit for fetching a daily puzzle")
 	flags.Usage = func() {
-		fmt.Fprint(errOut, "KRILLION · the daily deep cut\n\nUsage: krillion [--demo] [--plain | --json]\n\n")
+		fmt.Fprint(errOut, "Krillion Solver\n\nUsage: krillion [--demo] [--plain | --json]\n\n")
 		flags.PrintDefaults()
 	}
 	if err := flags.Parse(args); err != nil {
