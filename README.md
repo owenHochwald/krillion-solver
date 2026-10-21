@@ -5,5 +5,3 @@ An unofficial companion for [Krillion](https://krillion.io/). Find today's top a
 - **Terminal:** [Run the TUI](internal/README.md) for a keyboard driven view.
 - **macOS:** [Run the menu bar app](macos/README.md) for answers a click away while you play.
 - **Browser:** [Open Krillion Solver](https://owenhochwald.github.io/krillion-solver/) for instant access, with no setup.
-
-Each version shows all seven prompts, equal scoring answers, and the best available pick when no One in a Krillion answer exists.
