@@ -1,8 +1,11 @@
 GO ?= go
 DIST ?= dist
+XCODEBUILD ?= xcodebuild
 BINARY := krillion$(if $(filter Windows_NT,$(OS)),.exe,)
+MENU_BAR_APP := $(DIST)/KrillionBar.app
+MENU_BAR_DERIVED := $(DIST)/xcode
 
-.PHONY: build web macos macos-app linux windows release test vet clean
+.PHONY: build web macos macos-app menu-bar menu-bar-build linux windows release test vet clean
 
 build:
 	$(GO) build -o $(BINARY) .
@@ -15,8 +18,16 @@ macos:
 	GOOS=darwin GOARCH=arm64 CGO_ENABLED=0 $(GO) build -o $(DIST)/krillion-darwin-arm64 .
 	GOOS=darwin GOARCH=amd64 CGO_ENABLED=0 $(GO) build -o $(DIST)/krillion-darwin-amd64 .
 
-macos-app:
-	xcodebuild -project macos/KrillionBar.xcodeproj -scheme KrillionBar -configuration Release -derivedDataPath $(DIST)/xcode CODE_SIGNING_ALLOWED=NO build
+menu-bar-build:
+	$(XCODEBUILD) -quiet -project macos/KrillionBar.xcodeproj -scheme KrillionBar -configuration Release -derivedDataPath $(MENU_BAR_DERIVED) CODE_SIGNING_ALLOWED=NO build
+	@rm -rf -- "$(MENU_BAR_APP)"
+	@ditto "$(MENU_BAR_DERIVED)/Build/Products/Release/KrillionBar.app" "$(MENU_BAR_APP)"
+	@printf 'Built %s\n' "$(MENU_BAR_APP)"
+
+menu-bar: menu-bar-build
+	open "$(MENU_BAR_APP)"
+
+macos-app: menu-bar-build
 
 linux:
 	@mkdir -p $(DIST)
