@@ -42,11 +42,14 @@ The workflow needs public access to Krillion's `/api/today` and `/api/reveal` en
 
 The TUI also has a companion menu bar app for macOS 14 or later. Click its shrimp icon to see all seven answers in a compact panel, expand a round for the prompt and alternate winners, or copy an answer. It works alongside any browser.
 
-With Xcode installed, run:
+With Xcode installed, build and open the app with:
 
 ```sh
-make macos-app
-open dist/xcode/Build/Products/Release/KrillionBar.app
+make menu-bar
 ```
 
-The app uses the same daily Krillion endpoints and validation rules as the TUI. The generated Xcode project is also at `macos/KrillionBar.xcodeproj`; edit its source files under `macos/KrillionBar/`. The local `make macos-app` build is unsigned. A distributed build needs normal macOS signing and notarization.
+This puts the app at `dist/KrillionBar.app` and opens it. Look for the shrimp in the top menu bar; the app has no Dock window. For a build without opening it, use `make menu-bar-build`. You can open an existing build later with `open dist/KrillionBar.app`. The older `make macos-app` command still builds the app.
+
+The app uses the same daily Krillion endpoints and validation rules as the TUI. Its source is under `macos/KrillionBar/`, and the Xcode project is `macos/KrillionBar.xcodeproj`.
+
+`make menu-bar` builds from local source and produces an unsigned app for your own Mac. **Do not distribute that unsigned build or ask users to disable Gatekeeper.** The Xcode target is configured for the hardened runtime and App Sandbox with outgoing network access. For a downloadable release that macOS can verify, sign the app with a Developer ID certificate and notarize the distributed package with Apple. Signing establishes the publisher; notarization adds Apple's automated checks. Until that release process exists, the reproducible local build is the supported way to try the menu bar app.
