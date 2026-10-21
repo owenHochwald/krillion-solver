@@ -1,10 +1,12 @@
 # Krillion Solver
 
-See every **One in a Krillion** answer for today's seven prompts. Browse the prompts, read each answer's description, switch between equally scoring picks, and copy an answer or the full list.
+An unofficial solver for [Krillion](https://krillion.io/). See every **One in a Krillion** answer for today's seven prompts, read its description, switch between equally scoring picks, and copy an answer or the full list.
+
+![Krillion Solver showing today's answers and alternate picks](assets/krillion-solver.png)
 
 ## Run
 
-Requires Go 1.25 or later.
+[Download a macOS, Linux, or Windows build](https://github.com/owenHochwald/krillion-solver/releases/latest), or build from source with Go 1.25 or later:
 
 ```sh
 make
