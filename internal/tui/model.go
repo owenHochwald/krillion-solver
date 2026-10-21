@@ -9,6 +9,7 @@ import (
 	"charm.land/lipgloss/v2"
 	"github.com/charmbracelet/x/ansi"
 
+	"krillion-solver/internal/clipboard"
 	"krillion-solver/internal/game"
 )
 
@@ -17,6 +18,7 @@ type loaded struct {
 	err    error
 }
 type tick time.Time
+type copied struct{ err error }
 
 type Model struct {
 	load           func() (game.Result, error)
@@ -28,10 +30,11 @@ type Model struct {
 	scroll, frame  int
 	notice         string
 	noticeUntil    time.Time
+	copy           func(string) error
 }
 
 func New(load func() (game.Result, error), demo bool) Model {
-	return Model{load: load, loading: true, demo: demo, width: 100, height: 32}
+	return Model{load: load, copy: clipboard.Copy, loading: true, demo: demo, width: 100, height: 32}
 }
 
 func (m Model) Failed() bool { return m.err != nil }
@@ -62,6 +65,13 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			m.result = msg.result
 			m.selected, m.pick, m.scroll = 0, 0, 0
 		}
+	case copied:
+		if msg.err != nil {
+			m.notice = "Copy failed: " + msg.err.Error()
+		} else {
+			m.notice = "Copied to clipboard"
+		}
+		m.noticeUntil = time.Now().Add(5 * time.Second)
 	case tick:
 		m.frame++
 		if time.Now().After(m.noticeUntil) {
@@ -107,9 +117,8 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 			if key == "a" {
 				text = m.result.Plain()
 			}
-			m.notice = "Clipboard request sent"
-			m.noticeUntil = time.Now().Add(3 * time.Second)
-			return m, tea.SetClipboard(game.SafeText(text))
+			text = game.SafeText(text)
+			return m, m.copyText(text)
 		}
 		if m.selected != previous {
 			m.pick, m.scroll = 0, 0
@@ -118,12 +127,16 @@ func (m Model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 	return m, nil
 }
 
+func (m Model) copyText(text string) tea.Cmd {
+	return func() tea.Msg { return copied{err: m.copy(text)} }
+}
+
 func (m Model) View() tea.View {
 	v := tea.NewView(m.render())
 	v.AltScreen = true
 	v.BackgroundColor = ocean
 	v.ForegroundColor = pearl
-	v.WindowTitle = "Krillion · the daily deep cut"
+	v.WindowTitle = "Krillion Solver"
 	return v
 }
 
@@ -165,25 +178,18 @@ func (m Model) render() string {
 }
 
 func (m Model) header(w int) string {
-	label := ink(cyan).Bold(true).Render("K R I L L I O N")
-	status := ink(cyan).Render("● LIVE DAILY")
-	if m.demo {
-		status = ink(gold).Render("◇ DEMO / SAMPLE DATA")
-	}
-	top := between(label, status, w)
-	title := ink(pearl).Bold(true).Render("THE DAILY DEEP CUT")
+	title := ink(coral).Bold(true).Render("KRILLION SOLVER")
 	if m.height >= 32 && w >= 88 {
-		logo := "█▄▀ █▀█ █ █   █   █ █▀█ █▄ █\n█ █ █▀▄ █ █▄▄ █▄▄ █ █▄█ █ ▀█"
-		title = ink(coral).Bold(true).Render(logo) + "\n" + ink(muted).Render("T H E  D A I L Y  D E E P  C U T")
+		title = ink(coral).Bold(true).Render(asciiLogo)
 	}
-	meta := "7 prompts. Find the gold. Sink to the trench."
+	meta := "7 prompts. Every perfect answer."
 	if !m.loading && m.err == nil && len(m.result.Prompts) > 0 {
 		meta = fmt.Sprintf("DIVE %03d  /  %s  /  %d winning answers", m.result.DayNumber, m.result.Date, m.result.WinnerCount())
 		if m.demo {
 			meta = "ILLUSTRATIVE ANSWERS / not today's puzzle"
 		}
 	}
-	return top + "\n" + ink(line).Render(strings.Repeat("─", w)) + "\n\n" + title + "\n" + ink(muted).Render(ansi.Truncate(meta, w, "…"))
+	return title + "\n" + ink(line).Render(strings.Repeat("─", w)) + "\n" + ink(muted).Render(ansi.Truncate(meta, w, "…"))
 }
 
 func (m Model) roundList(w int, compact bool) string {
@@ -262,16 +268,10 @@ func (m Model) detail(w, h int) string {
 }
 
 func (m Model) footer(w int) string {
-	left := "0m  "
-	right := "  7,000m / THE TRENCH"
-	barWidth := max(1, w-len(left)-len(right))
-	bar := ink(line).Render(strings.Repeat("░", barWidth))
-	stat := "Charting the descent"
+	stat := "Loading today's answers"
 	if !m.loading && m.err == nil && len(m.result.Prompts) > 0 {
-		bar = ink(gold).Render(strings.Repeat("━", barWidth))
 		stat = fmt.Sprintf("%d / 700 possible points · 7 / 7 rounds", m.result.Score())
 	}
-	depth := ink(muted).Render(left) + bar + ink(gold).Render(right)
 	reset := ""
 	if m.result.ResetsAt != nil && !m.demo {
 		remaining := time.Until(*m.result.ResetsAt)
@@ -283,12 +283,12 @@ func (m Model) footer(w int) string {
 			reset = "new dive available · r refresh"
 		}
 	}
-	keys := "↑↓ round · c copy · r refresh · q quit"
+	keys := "↑↓/jk round · c copy · r refresh · q quit"
 	if w >= 88 {
-		keys = "↑↓ / 1–7 round   ←→ alternate   c copy   a copy all   r refresh   q quit"
+		keys = "↑↓ / jk / 1–7 round   ←→ alternate   c copy   a copy all   r refresh   q quit"
 	}
 	if m.notice != "" {
 		keys = m.notice
 	}
-	return depth + "\n" + between(ink(cyan).Render(stat), ink(muted).Render(reset), w) + "\n\n" + ink(muted).Render(ansi.Truncate(keys, w, "…"))
+	return between(ink(cyan).Render(stat), ink(muted).Render(reset), w) + "\n\n" + ink(muted).Render(ansi.Truncate(keys, w, "…"))
 }
