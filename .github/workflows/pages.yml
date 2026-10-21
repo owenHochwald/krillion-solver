@@ -32,6 +32,7 @@ jobs:
         run: |
           mkdir public
           cp web/index.html web/styles.css web/app.js web/github.svg public/
+          sed -i "s/__BUILD__/${GITHUB_SHA}/g" public/index.html
           go run . --json > public/data.json
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
