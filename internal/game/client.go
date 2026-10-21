@@ -106,7 +106,22 @@ func (c *Client) solve(ctx context.Context) (Result, error) {
 			}
 		}
 		if len(round.Winners) == 0 {
-			return Result{}, fmt.Errorf("round %s has no Krillion answer; reveal may no longer be available", SafeText(p.ID))
+			bestScore := -1
+			for _, a := range answers.Answers {
+				if strings.TrimSpace(a.Answer) == "" || a.Score < 0 || a.Score >= 100 {
+					continue
+				}
+				if a.Score > bestScore {
+					bestScore = a.Score
+					round.Winners = []Answer{a}
+				} else if a.Score == bestScore {
+					round.Winners = append(round.Winners, a)
+				}
+			}
+			if len(round.Winners) == 0 {
+				return Result{}, fmt.Errorf("round %s has no usable answers", SafeText(p.ID))
+			}
+			round.Fallback = true
 		}
 		result.Prompts = append(result.Prompts, round)
 	}
